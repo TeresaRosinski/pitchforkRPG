@@ -1,0 +1,44 @@
+/*
+Characters + Properties -- Attack
+1- Fighters
+  Type: 
+  Name:
+  Weapon: pitchfork
+  hay
+
+2 - Monster
+3-
+Character Class
+Type | Crop, wolf, bandit, etc
+Name | Chungus the chubby bandit
+Weapon | Dirty fingernails
+Life | 20
+
+goal: create two characters that can kill each other
+
+Functionality
+*/
+
+const { type } = require("jquery");
+
+
+// class Player {
+// weapon | Pitchfork + 2 to damage
+// job | Farmer, double damage to crops and wolves
+// level | damage = (level/10)+1, so level 3 = 0.3+1 for 1.3* damage
+// }
+
+
+export function createCharacter (type, name, weapon, life) {
+  return {
+    type, 
+    name,
+    weapon,
+    life,
+    talk: function () {
+    return  `I, ${name} am the strongest ${type} in the land. Me and my ${weapon} will destory everything.`
+    }
+  }
+};
+
+//()
