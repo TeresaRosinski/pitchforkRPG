@@ -1,4 +1,5 @@
 import {createCharacter} from '../src/main.js';
+import {incurredDamage} from '../src/main.js';
 
 
 describe('character', () => {
@@ -15,4 +16,29 @@ describe('talk', () => {
     });
   });
 
+   describe('gotAttacked', () => {
+    test('should make an instance of the character losting life points', () => {
+      var newCharacter = createCharacter("Farmer",  "Boba", "Pitchfork", 10);
+      newCharacter.gotAttacked(2); // reduce -> reddmg 
+      expect(newCharacter.life).toEqual(8);
+      });
+    });
+
+    describe('getdied', () => {
+      test('should result in suffering', () => {
+        var newCharacter = createCharacter("Farmer", "Boba", "Pitchfork", 10);
+        newCharacter.gotAttacked(redDmg);
+        expect(newCharacter.life).toBe(0);
+      });
+    });
+
+    describe('did the thing occur', () => {
+      test('Oh no it did', () => {
+        var newCharacter = createCharacter("Farmer", "Boba", "Pitchfork", 10);
+        var newerCharacter = createCharacter("Farmer", "Staple", "Pitchfork", 10);
+        newCharacter.gotAttacked(newerCharacter);
+        expect(newCharacter.life).toBe(9);        
+      })
+    });    
 });
+
