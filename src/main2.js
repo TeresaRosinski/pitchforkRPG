@@ -7,11 +7,12 @@ export const isAcharacter = function createCharacter (name) {
 
 //used to become a specific character
 const isAFarmer = function (character){
-  const character = {
-    character.type: 'Farmer', 
-    character.weapon: pitchfork,
-    character.life: 10,
-    character.damagePower: 1
+  return {
+    ...isAcharacter,
+    type: 'Farmer', 
+    weapon: 'pitchfork',
+    life: 10,
+    damagePower: 1
   }
   return obj;
 }
