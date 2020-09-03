@@ -1,62 +1,113 @@
-/*
-Characters + Properties -- Attack
-1- Fighters
-  Type: 
-  Name:
-  Weapon: pitchfork
-  hay
-
-2 - Monster
-3-
-Character Class
-Type | Crop, wolf, bandit, etc
-Name | Chungus the chubby bandit
-Weapon | Dirty fingernails
-Life | 20
-
-goal: create two characters that can kill each other
-
-Functionality
-*/
-
-const { type } = require("jquery");
-
-
-// class Player {
-// weapon | Pitchfork + 2 to damage
-// job | Farmer, double damage to crops and wolves
-// level | damage = (level/10)+1, so level 3 = 0.3+1 for 1.3* damage
-// }
-
-
 export function createCharacter (type, name, weapon, life) {
   let character = {
-    type, // if key and value are the same you don't need to specify value
+    type, 
     name, 
     weapon,
     life,
-    gotAttacked (opposingCharcter) {
-      //opposingCharcter.incurredDamage();
-      damage = incurredDamage(opposingCharacter);
+    gotAttacked (opposingCharacter) {
+      let oppCharacter = opposingCharacter;
+      let damage = incurredDamage(oppCharacter);
       character.life -= damage;
+      if (character.life == 0) {
+        return `You died`;
+      };
       },
+
     talk: function () {
       return  `I, ${name} am the strongest ${type} in the land. Me and my ${weapon} will destory everything.`
-    }
+    },
   }
   return character;
 };
 
-export function incurredDamage (opposingCharacter){
+
+export function canIncurrDamage (opposingCharacter){
   if(opposingCharacter.type === "farmer") {
-    return 1;}
+    return character.life - 1;}
   else if(opposingCharacter.type === "soldier"){
-    return 3; }
+    return character.life - 3; }
   else if(opposingCharacter.type === "hero")
-    {return 5;} 
+    {return character.life - 5;} 
   };
 
+export function canAttack()
+export function canDie()
+export function canSpeakMessages()
+export function canBeAFarmer() // remove type from original object and use a function to create types?
+export function canHaveASword()
+export function canHaveAPitchfork()
+export function canHaveARifle()
 
+
+// This creates function
+const changeState = (prop) => {
+  return (value) => {
+    return (state) => ({
+      ...state,
+      [prop] : (state[prop] || 0) + value
+    })
+  }
+}
+const storeState = () => {
+  let currentState = {};
+  return (stateChangeFunction = state => state) => {
+    const newState = stateChangeFunction(currentState);
+    currentState = {...newState};
+    return newState;
+  }
+}
+const stateControl = storeState();
+// The above stores function
+
+
+const storeState = (initialState) => { // stores the state of initialState
+  let currentState = initialState; // can also be initialized as empty let currentState = {};
+  return (stateChangeFunction = state => state) => {
+    const newState = stateChangeFunction(currentState);
+    currentState = {...newState};
+    return newState;
+  }
+}
+
+const player = storeState({life: 0, damage: 0, name: "string"}); // initializing the state so currentState = {life: 0, damage: 0, name: "string"};
+const jobFarmer = changeState("life")(10); // changes currentstate to {life: 10, damage: 0, name: "string"}
+
+// Singular prop for changing state
+const changeStringState = (prop) => {
+  return (value) => {
+    return (state) => ({
+      ...state,
+      [prop] : value
+    }) 
+  }
+}
+
+// Dual props for changing state
+const changeTwoStateProps = (prop) => {
+  return (prop2) => {
+    return (value) => {
+      return (value2) => {
+        return (state) => ({
+          ...state,
+          [prop] : (state[prop] || 0) + value,
+          [prop2] : (state[prop2] || 0) + value2
+        }) 
+      }
+    }
+  }
+}
+// Button for farmer = life/dmg and textbar.txt-> name
+// changeTwoStateProps("life")(10)("damage")(1)
+
+
+// player = {life: NaN, damage: NaN, name: "string"}
+// const jobFarmer = changeState("life")(10) && changeState("damage")(1)
+// jobFarmer(player) || Object { life: 10, damage: NaN, name: "string" }
+
+// job = farmer{life:10, damage: 1}
+// player = name
+// let player = { life: 10, damage: 1, name: "Boba"} || let player = job{10, 1} + name
+// const jobFarmer = changeState("life")(10)
 
 // Pitchfork || 2
 // Sword || 5

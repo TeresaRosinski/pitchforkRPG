@@ -24,15 +24,16 @@ describe('talk', () => {
       });
     });
 
+    /*
     describe('getdied', () => {
       test('should result in suffering', () => {
         var newCharacter = createCharacter("Farmer", "Boba", "Pitchfork", 10);
         newCharacter.gotAttacked(redDmg);
         expect(newCharacter.life).toBe(0);
       });
-    });
+    }); */
 
-    describe('did the thing occur', () => {
+    describe('did the damage occur', () => {
       test('Oh no it did', () => {
         var newCharacter = createCharacter("Farmer", "Boba", "Pitchfork", 10);
         var newerCharacter = createCharacter("Farmer", "Staple", "Pitchfork", 10);
